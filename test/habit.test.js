@@ -24,26 +24,26 @@ describe('app routes', () => {
     .post('/api/v1/habit')
     .send({
       habit: 'drink water',
-      descritpion: 'wet the mouth & swallow',
+      description: 'wet the mouth & swallow',
       user: 'Water Drinker',
       timestamp: '1111'
     })
     .then(res => {
-      expect(res.body.toEqual({
+      expect(res.body).toEqual({
         _id: expect.any(String),
         habit: 'drink water',
-      descritpion: 'wet the mouth & swallow',
+      description: 'wet the mouth & swallow',
       user: 'Water Drinker',
       timestamp: expect.any(String),
       __v: 0
-      }));
+      });
     });
   });
 
   it('gets a habit', async() => {
     const habit = Habit.create({
       habit: 'drink water',
-      descritpion: 'wet the mouth & swallow',
+      description: 'wet the mouth & swallow',
       user: 'Water Drinker',
       timestamp: '1111'
     });
@@ -83,7 +83,7 @@ describe('app routes', () => {
   it('deletes a habit', async() => {
     const habit = await Habit.create({
       habit: 'drink water',
-      descritpion: 'wet the mouth & swallow',
+      description: 'wet the mouth & swallow',
       user: 'Water Drinker',
       timestamp: '1111'
     });
@@ -93,7 +93,7 @@ describe('app routes', () => {
       expect(res.body).toEqual({
         _id: expect.any(String),
         habit: 'drink water',
-      descritpion: 'wet the mouth & swallow',
+      description: 'wet the mouth & swallow',
       user: 'Water Drinker',
       timestamp: '1111',
       __v: 0
