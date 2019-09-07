@@ -6,6 +6,8 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Habit = require('../lib/models/Habit');
 
+jest.mock('../lib/middleware/ensure-auth.js');
+
 describe('app routes', () => {
   beforeAll(() => {
     connect();
@@ -24,9 +26,7 @@ describe('app routes', () => {
     .post('/api/v1/habit')
     .send({
       habit: 'drink water',
-      description: 'wet the mouth & swallow',
-      user: 'Water Drinker',
-      timestamp: '1111'
+      description: 'wet the mouth & swallow'
     })
     .then(res => {
       expect(res.body).toEqual({
@@ -34,7 +34,7 @@ describe('app routes', () => {
         habit: 'drink water',
       description: 'wet the mouth & swallow',
       user: 'Water Drinker',
-      timestamp: expect.any(String),
+      createdAt: expect.any(String),
       __v: 0
       });
     });
